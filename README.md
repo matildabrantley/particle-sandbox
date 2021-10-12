@@ -7,7 +7,7 @@
 * [License](#license)
 * [Questions](#questions)
 ## Description
-Explore a world of emergent 2D particle interactions formed from simple rules of attraction and repulsion of various particle types.
+Explore a world of emergent 2D particle interactions formed from simple rules of attraction and repulsion of various particle types. Originally created in Jan 2018.
 
 ## Features 
 Three fundamental forces loosely simulated:

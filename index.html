@@ -11,22 +11,22 @@
 <script>
 
   //const DIMS = 2; //2d
-  var initialNumForces = 6;
-  var forces = new Array(initialNumForces);
+  const initialNumForces = 6;
+  const forces = new Array(initialNumForces);
   
-  var ROW=20;
-  var COL=12;
-  var numParticles = ROW*COL;
-  var numParticleTypes = 9;
-  var particles = [];
+  const ROW=20;
+  const COL=12;
+  const numParticles = ROW*COL;
+  const numParticleTypes = 9;
+  const particles = [];
   
-  var canvas = document.getElementById("theCanvas");
-  var cx = canvas.getContext("2d");
-  var trails = true, edgeCollision = true, mouseDown = false, randomAttraction = false;
-  var mouseDownX, mouseDownY;
+  const canvas = document.getElementById("theCanvas");
+  const cx = canvas.getContext("2d");
+  let trails = true, edgeCollision = true, mouseDown = false, randomAttraction = false;
+  let mouseDownX, mouseDownY;
   window.addEventListener('keydown',this.keyMoveAllParticles,false);
   
-  var count = 0;
+  let count = 0;
   setInterval(interact, 50);
   
   function Force(name, magnitude, range, minRange, frequency, attractionType){
@@ -64,53 +64,53 @@
 	
 	forces[0].special = 0.1; //downward gravity
 	
-    var p = 0;
+    let p = 0;
 	startingX = (canvas.width / 2) - 180;
 	startingY = (canvas.height / 2) - 120;
-    var xi = startingX;
-    var yi = startingY;
-    for(var i=0; i<COL; i++){
+    let xi = startingX;
+    let yi = startingY;
+    for(let i=0; i<COL; i++){
       xi = startingX;
-      for(var j=0; j<ROW; j++){	
+      for(let j=0; j<ROW; j++){	
 		switch (p % numParticleTypes) {
 			case 0: 
-				var forceInteractions = [0.57, 0.21, 0.41, 0.02, 0.1, 0.1]; 
+				const forceInteractions = [0.57, 0.21, 0.41, 0.02, 0.1, 0.1]; 
 				particles.push(new Particle(xi, yi, 2, "circle", "#d30000", forceInteractions));//red
 				break;
 			case 1: 
-				var forceInteractions = [0.8, 0.81, 0.81, 0.81, -0.3, 0.13];
+				const forceInteractions = [0.8, 0.81, 0.81, 0.81, -0.3, 0.13];
 				particles.push(new Particle(xi, yi, 3, "square", "gray", forceInteractions));
 				break;
 			case 2: 
-				var forceInteractions = [0.15, -1, -0.3, -0.03, 0.1, 0.2];
+				const forceInteractions = [0.15, -1, -0.3, -0.03, 0.1, 0.2];
 				particles.push(new Particle(xi, yi, 2, "square", "#eeff3d", forceInteractions));
 				break;
 			case 3: 
-				var forceInteractions = [0.01, -1.35, -0.4, 0.03, 0.6, 0.4];
+				const forceInteractions = [0.01, -1.35, -0.4, 0.03, 0.6, 0.4];
 				particles.push(new Particle(xi, yi, 1, "square", "white", forceInteractions));
 				break;
 			case 4: 
-				var forceInteractions = [0.02, 0.20, 0.1, 1.2, -0.3, 0.1];
+				const forceInteractions = [0.02, 0.20, 0.1, 1.2, -0.3, 0.1];
 				particles.push(new Particle(xi, yi, 2, "circle", "#7a7aff", forceInteractions));
 				break;
 			case 5: 
-				var forceInteractions = [0.3, -0.40, 0.3, -1.2, -0.6, 0.1];
+				const forceInteractions = [0.3, -0.40, 0.3, -1.2, -0.6, 0.1];
 				particles.push(new Particle(xi, yi, 2, "circle", "purple", forceInteractions));
 				break;
 			case 6: 
-				var forceInteractions = [0.025, 0.05, 0, 0.2, 1.1, 0.2];
+				const forceInteractions = [0.025, 0.05, 0, 0.2, 1.1, 0.2];
 				particles.push(new Particle(xi, yi, 1, "circle", "gold", forceInteractions));
 				break;
 			case 7: 
-				var forceInteractions = [0.20, 0.05, 0, 0.1, -1.1, 0.1];
+				const forceInteractions = [0.20, 0.05, 0, 0.1, -1.1, 0.1];
 				particles.push(new Particle(xi, yi, 2, "circle", "#f442b9", forceInteractions));
 				break;
 			case 8: 
-				var forceInteractions = [0.8, 0.3, 0.0, 0.03,-0.4, 0.1];
+				const forceInteractions = [0.8, 0.3, 0.0, 0.03,-0.4, 0.1];
 				particles.push(new Particle(xi, yi, 2, "circle", "#000033", forceInteractions));
 				break;
 			default:
-				var forceInteractions = [0, 0, 0, 0]; //dead particle
+				const forceInteractions = [0, 0, 0, 0]; //dead particle
 				particles.push(new Particle(xi, yi, 10, "square", "white", forceInteractions)); 
 		
 		}
@@ -137,18 +137,18 @@ function removeRandomParticle(){
 }  
 
 function addCustomForce(){
-	var name = prompt("Name of force: ", "Force " + (forces.length + 1));
-	var mag = (name == null) ? 0 : prompt("New force's strength", "10.5");
-	var range = (mag == null) ? 0 : prompt("New force's range:", "75");
-	var freq = (range == null) ? 1 :  prompt("New force's frequency (min. 1):", "1");
-	var attractionType = (freq == null) ? 0 :  prompt("New force's attraction type (0 is pure attraction, 1 is opposite's attract, 2 is likes attract, 3 is pure repulsion): ", "1");
+	const name = prompt("Name of force: ", "Force " + (forces.length + 1));
+	const mag = (name == null) ? 0 : prompt("New force's strength", "10.5");
+	const range = (mag == null) ? 0 : prompt("New force's range:", "75");
+	const freq = (range == null) ? 1 :  prompt("New force's frequency (min. 1):", "1");
+	const attractionType = (freq == null) ? 0 :  prompt("New force's attraction type (0 is pure attraction, 1 is opposite's attract, 2 is likes attract, 3 is pure repulsion): ", "1");
 	if (attractionType != null) {
 		forces.push(new Force(name, mag, range, 0, freq, attractionType));
-		for (var i=0; i<particles.length; i++)
+		for (let i=0; i<particles.length; i++)
 			particles[i].interactions.push(Math.random() - 1);//Math.random());
 	}
 	/*
-	var newSlider = document.forceSliders.createElement("input");
+	let newSlider = document.forceSliders.createElement("input");
     newSlider.setAttribute("type", "range");
 	newSlider.setAttribute("min", "0");
 	newSlider.setAttribute("max", "1");
@@ -162,28 +162,28 @@ function addCustomForce(){
 }
 
 function addCustomParticle(){
-	//var name = prompt("New particle's name:", "New Particle");
-	var quantity = prompt("How many:", "20");
-	var size = (quantity == null) ? 0 : prompt("New particle's size (1-5):", "2");
-	var color = (size == null) ? "white" : prompt("New particle's color:", "white");
-	var forceInteractions = new Array(forces.length);
+	//const name = prompt("New particle's name:", "New Particle");
+	const quantity = prompt("How many:", "20");
+	const size = (quantity == null) ? 0 : prompt("New particle's size (1-5):", "2");
+	const color = (size == null) ? "white" : prompt("New particle's color:", "white");
+	const forceInteractions = new Array(forces.length);
 	if (color != null)
-		for (var f=0; f<forces.length; f++){
-			var inter = Math.random();
+		for (let f=0; f<forces.length; f++){
+			let inter = Math.random();
 			if (Math.random() > 0.5)
 				inter *= (-1);
 			if (Math.random() > 0.5)
 				inter /= 2;
 			forceInteractions[f] = prompt("New particle's interaction with " + forces[f].name + ":", inter);
 		}
-	var sqrt = Math.sqrt(quantity);
-	var xGap = Math.floor(canvas.width / sqrt);
-	var yGap = Math.floor(canvas.height / sqrt);
-	var xi = xGap;
-    var yi = yGap;
-	for (var i=0; i<Math.sqrt(quantity); i++){
+	const sqrt = Math.sqrt(quantity);
+	const xGap = Math.floor(canvas.width / sqrt);
+	const yGap = Math.floor(canvas.height / sqrt);
+	const xi = xGap;
+    const yi = yGap;
+	for (let i=0; i<Math.sqrt(quantity); i++){
 		xi = xGap;
-		for (var j=0; j<Math.sqrt(quantity); j++){
+		for (let j=0; j<Math.sqrt(quantity); j++){
 		debugger;
 			particles.push(new Particle(100, 100, size, "circle", color, forceInteractions)); 
 			xi += xGap;
@@ -193,7 +193,7 @@ function addCustomParticle(){
 }
 
 function keyMoveAllParticles(event){
-	var direction = [0,0];
+	const direction = [0,0];
     switch (event.keyCode) {
         case 37: direction[0] -= 2; //left key press
 				 break; 
@@ -204,7 +204,7 @@ function keyMoveAllParticles(event){
         case 40: direction[1] += 2; //down key press
 				 break; 
 	}
-	for (var i=0; i<particles.length; i++){
+	for (let i=0; i<particles.length; i++){
 		particles[i].x += direction[0];
 		particles[i].y += direction[1];
 	}
@@ -219,7 +219,7 @@ function onMouseDown(event) {
 	mouseDownX = event.pageX - canvas.offsetLeft;
 	mouseDownY = event.pageY - canvas.offsetLeft; //>.<
 
-	var forceInteractions = [80, 0, 0, 0, 0, 0];
+	const forceInteractions = [80, 0, 0, 0, 0, 0];
 	particles.push(new Particle(mouseDownX, mouseDownY, 20, "square", "black", forceInteractions)); 
 }
 
@@ -238,7 +238,7 @@ function onMouseMove(event) {
 }
 
 function viewPaths(){
-	var checkBox = document.getElementById("trailCheckbox");
+	const checkBox = document.getElementById("trailCheckbox");
 	if (checkBox.checked == true)
 		trails = true;
 	else
@@ -246,7 +246,7 @@ function viewPaths(){
 }
 
 function edgeCollisionChange(){
-	var checkBox = document.getElementById("edgeCollisionCheckbox");
+	const checkBox = document.getElementById("edgeCollisionCheckbox");
 	if (checkBox.checked == true)
 		edgeCollision = true;
 	else
@@ -254,7 +254,7 @@ function edgeCollisionChange(){
 }
 
 function randomAttractions(){
-	var checkBox = document.getElementById("randomAttractionsCheckbox");
+	const checkBox = document.getElementById("randomAttractionsCheckbox");
 	if (checkBox.checked == true)
 		randomAttraction = true;
 	else
@@ -283,18 +283,18 @@ function interact() {
 	repaint();
 	 
 	//copy coordinates into temp arrays
-	var tempXCoordinates = new Array(particles.length), tempYCoordinates = new Array(particles.length);
-	for (var i=0; i<particles.length; i++){
+	const tempXCoordinates = new Array(particles.length), tempYCoordinates = new Array(particles.length);
+	for (let i=0; i<particles.length; i++){
 		tempXCoordinates[i] = particles[i].x;
 		tempYCoordinates[i] = particles[i].y;
 	}
 	
 	//noise generator
 	if (count > 30) {
-		var particleType = Math.floor(Math.random() * numParticleTypes);
-		var affectedForce = Math.floor(Math.random() * forces.length);
-		var forceChange = (Math.random() - 0.5) * 0.025;
-		for (var i=0; i<particles.length; i++)
+		const particleType = Math.floor(Math.random() * numParticleTypes);
+		const affectedForce = Math.floor(Math.random() * forces.length);
+		const forceChange = (Math.random() - 0.5) * 0.025;
+		for (let i=0; i<particles.length; i++)
 			if (i % particleType == 0)
 				particles[i].interactions[affectedForce] += forceChange;
 	}
@@ -338,7 +338,7 @@ function interact() {
 	//****************************************
     //******** Particle Interaction **********
     //****************************************  	
-	for(var i=0; i<particles.length; i++){
+	for(let i=0; i<particles.length; i++){
 		//special interactions go here
 		tempYCoordinates[i] += forces[0].special; //downward gravity
 		//disables moving the invisible particle created by the user's mouse click
@@ -346,10 +346,10 @@ function interact() {
 				continue; 
 		}
 		//particle-particle interactions
-        for(var j=0; j<particles.length; j++){
-			var dX = particles[j].x - particles[i].x;
-			var dY = particles[j].y - particles[i].y; 
-			//var angle = Math.atan(dY, dX);
+        for(let j=0; j<particles.length; j++){
+			const dX = particles[j].x - particles[i].x;
+			const dY = particles[j].y - particles[i].y; 
+			//const angle = Math.atan(dY, dX);
 			distance = Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));		
 			//prevent particles from occupying exact same position
 			if (distance <= particles[i].size) {
@@ -368,10 +368,10 @@ function interact() {
 				}
 			} else {
 				//main interactions
-				for (var f=0; f<forces.length; f++){
-					var fullInteraction;
-					var interactionOfI = particles[i].interactions[f];
-					var interactionOfJ = particles[j].interactions[f];
+				for (let f=0; f<forces.length; f++){
+					let fullInteraction;
+					const interactionOfI = particles[i].interactions[f];
+					const interactionOfJ = particles[j].interactions[f];
 					if ((distance < forces[f].range && distance > forces[f].minRange) && (count % forces[f].freq == 0))			
 						switch (forces[f].attractionType) {
 							case 0: //Universal attraction
@@ -390,19 +390,19 @@ function interact() {
 								fullInteraction = forces[f].mag * interactionOfI * interactionOfJ;
 								break;
 							case 5: //Attracted by positive, repelled by negative
-								var polarity = (interactionOfJ < 0) ? -1 : 1;
+								const polarity = (interactionOfJ < 0) ? -1 : 1;
 								fullInteraction = polarity * forces[f].mag * interactionOfI * interactionOfJ;
 								break;
 							case 6: //Attracted by negative, repelled by positive
-								var polarity = (interactionOfJ < 0) ? 1 : -1;
+								const polarity = (interactionOfJ < 0) ? 1 : -1;
 								fullInteraction = polarity * forces[f].mag * interactionOfI * interactionOfJ;
 								break;
 							case 7: //Stronger particle determines full interaction
-								var stronger = (interactionOfI >= interactionOfJ) ? interactionOfI : interactionOfJ;
+								const stronger = (interactionOfI >= interactionOfJ) ? interactionOfI : interactionOfJ;
 								fullInteraction = forces[f].mag * stronger * stronger;
 								break;
 							case 8: //Weaker particle determines full interaction
-								var weaker = (interactionOfI >= interactionOfJ) ? interactionOfI : interactionOfJ;
+								const weaker = (interactionOfI >= interactionOfJ) ? interactionOfI : interactionOfJ;
 								fullInteraction = forces[f].mag * weaker * weaker;
 								break;
 							case 9: //Distance scaling
@@ -418,9 +418,9 @@ function interact() {
 		
 	//wall/ground collision
 	if (edgeCollision && count % 50 != 0)
-		for (var i=0; i<particles.length; i++){
-			var deltaX = tempXCoordinates[i] - particles[i].x;
-			var deltaY = tempYCoordinates[i] - particles[i].y;
+		for (let i=0; i<particles.length; i++){
+			const deltaX = tempXCoordinates[i] - particles[i].x;
+			const deltaY = tempYCoordinates[i] - particles[i].y;
 			if (tempXCoordinates[i] > canvas.width)
 				tempXCoordinates[i] = canvas.width - deltaX*0.9 - 1;
 			if (tempYCoordinates[i] > canvas.height)
@@ -431,7 +431,7 @@ function interact() {
 				tempYCoordinates[i] = 1 + deltaY*0.9;
 		}
 	else
-		for (var i=0; i<particles.length; i++){
+		for (let i=0; i<particles.length; i++){
 			if ((tempXCoordinates[i] > canvas.width || tempYCoordinates[i] > canvas.height) 
 			     || (tempXCoordinates[i] < 0 || tempYCoordinates[i] < 0)
 				 || (isNaN(tempXCoordinates[i])  || isNaN(tempYCoordinates[i]))){
@@ -441,7 +441,7 @@ function interact() {
 		}
 	
 	//transfer new coordinates to particles	
-	for (var i=0; i<particles.length; i++){
+	for (let i=0; i<particles.length; i++){
 		particles[i].x = tempXCoordinates[i];
 		particles[i].y = tempYCoordinates[i];
 	}
@@ -451,7 +451,7 @@ function interact() {
 
 function repaint(){
 	//paint the new situation
-	for(var i=0; i<particles.length; i++){
+	for(let i=0; i<particles.length; i++){
 		if (particles[i].shape == "circle"){
 			cx.strokeStyle = particles[i].color;
 			cx.beginPath();
