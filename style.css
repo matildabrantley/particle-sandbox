@@ -1,0 +1,108 @@
+body {
+	background: url("background3.png") repeat 0 0;
+	background-size: cover;
+	font-family: "Times New Roman", Times, serif;
+	color: white;
+}
+
+canvas {
+	border:1px solid #d3d3d3;
+    background-color: #000000;
+	margin-left: 100px;
+}
+
+p {
+	font-size: 25px;
+	color: #000107;
+	margin-left: 100px;
+	font-family: Courier;
+}
+
+a {
+	font-size: 22px;
+	color: black;
+}
+
+h1 {
+	margin-left: 75px;
+	font-size: 48px;
+	color: black;
+	font-family: Courier;
+}
+
+h6 {
+	margin-left: 120px;
+	font-size: 18px;
+	color: 	#000107;
+	font-family: Courier;
+}
+
+.button {
+    background-color: #800080;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+	margin-left: 100px;
+	margin-right: 10px;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+	width: 200px;
+	height: 50px;
+}
+
+.checkbox {
+    margin-right: 50px;
+}
+
+div.checkboxes {
+	margin-left: 100px;
+}
+
+input[type=checkbox] {
+    transform: scale(2);
+    -ms-transform: scale(2);
+    -webkit-transform: scale(2);
+    padding: 10px;
+}
+
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 50%;
+    height: 15px;
+    border-radius: 5px;
+	margin-left: 100px;
+	margin-top: 10px;
+    background: #800080;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
