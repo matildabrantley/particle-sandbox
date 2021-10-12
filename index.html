@@ -72,45 +72,46 @@
     for(let i=0; i<COL; i++){
       xi = startingX;
       for(let j=0; j<ROW; j++){	
+		let forceInteractions = [0, 0, 0, 0, 0, 0]; 
 		switch (p % numParticleTypes) {
 			case 0: 
-				const forceInteractions = [0.57, 0.21, 0.41, 0.02, 0.1, 0.1]; 
+				forceInteractions = [0.57, 0.21, 0.41, 0.02, 0.1, 0.1]; 
 				particles.push(new Particle(xi, yi, 2, "circle", "#d30000", forceInteractions));//red
 				break;
 			case 1: 
-				const forceInteractions = [0.8, 0.81, 0.81, 0.81, -0.3, 0.13];
+				forceInteractions = [0.8, 0.81, 0.81, 0.81, -0.3, 0.13];
 				particles.push(new Particle(xi, yi, 3, "square", "gray", forceInteractions));
 				break;
 			case 2: 
-				const forceInteractions = [0.15, -1, -0.3, -0.03, 0.1, 0.2];
+				forceInteractions = [0.15, -1, -0.3, -0.03, 0.1, 0.2];
 				particles.push(new Particle(xi, yi, 2, "square", "#eeff3d", forceInteractions));
 				break;
 			case 3: 
-				const forceInteractions = [0.01, -1.35, -0.4, 0.03, 0.6, 0.4];
+				forceInteractions = [0.01, -1.35, -0.4, 0.03, 0.6, 0.4];
 				particles.push(new Particle(xi, yi, 1, "square", "white", forceInteractions));
 				break;
 			case 4: 
-				const forceInteractions = [0.02, 0.20, 0.1, 1.2, -0.3, 0.1];
+				forceInteractions = [0.02, 0.20, 0.1, 1.2, -0.3, 0.1];
 				particles.push(new Particle(xi, yi, 2, "circle", "#7a7aff", forceInteractions));
 				break;
 			case 5: 
-				const forceInteractions = [0.3, -0.40, 0.3, -1.2, -0.6, 0.1];
+				forceInteractions = [0.3, -0.40, 0.3, -1.2, -0.6, 0.1];
 				particles.push(new Particle(xi, yi, 2, "circle", "purple", forceInteractions));
 				break;
 			case 6: 
-				const forceInteractions = [0.025, 0.05, 0, 0.2, 1.1, 0.2];
+				forceInteractions = [0.025, 0.05, 0, 0.2, 1.1, 0.2];
 				particles.push(new Particle(xi, yi, 1, "circle", "gold", forceInteractions));
 				break;
 			case 7: 
-				const forceInteractions = [0.20, 0.05, 0, 0.1, -1.1, 0.1];
+				forceInteractions = [0.20, 0.05, 0, 0.1, -1.1, 0.1];
 				particles.push(new Particle(xi, yi, 2, "circle", "#f442b9", forceInteractions));
 				break;
 			case 8: 
-				const forceInteractions = [0.8, 0.3, 0.0, 0.03,-0.4, 0.1];
+				forceInteractions = [0.8, 0.3, 0.0, 0.03,-0.4, 0.1];
 				particles.push(new Particle(xi, yi, 2, "circle", "#000033", forceInteractions));
 				break;
 			default:
-				const forceInteractions = [0, 0, 0, 0]; //dead particle
+				forceInteractions = [0, 0, 0, 0]; //dead particle
 				particles.push(new Particle(xi, yi, 10, "square", "white", forceInteractions)); 
 		
 		}
@@ -148,7 +149,7 @@ function addCustomForce(){
 			particles[i].interactions.push(Math.random() - 1);//Math.random());
 	}
 	/*
-	let newSlider = document.forceSliders.createElement("input");
+	const newSlider = document.forceSliders.createElement("input");
     newSlider.setAttribute("type", "range");
 	newSlider.setAttribute("min", "0");
 	newSlider.setAttribute("max", "1");
@@ -166,7 +167,7 @@ function addCustomParticle(){
 	const quantity = prompt("How many:", "20");
 	const size = (quantity == null) ? 0 : prompt("New particle's size (1-5):", "2");
 	const color = (size == null) ? "white" : prompt("New particle's color:", "white");
-	const forceInteractions = new Array(forces.length);
+	let forceInteractions = new Array(forces.length);
 	if (color != null)
 		for (let f=0; f<forces.length; f++){
 			let inter = Math.random();
@@ -179,8 +180,8 @@ function addCustomParticle(){
 	const sqrt = Math.sqrt(quantity);
 	const xGap = Math.floor(canvas.width / sqrt);
 	const yGap = Math.floor(canvas.height / sqrt);
-	const xi = xGap;
-    const yi = yGap;
+	let xi = xGap;
+    let yi = yGap;
 	for (let i=0; i<Math.sqrt(quantity); i++){
 		xi = xGap;
 		for (let j=0; j<Math.sqrt(quantity); j++){
@@ -369,9 +370,10 @@ function interact() {
 			} else {
 				//main interactions
 				for (let f=0; f<forces.length; f++){
-					let fullInteraction;
+					var fullInteraction;
 					const interactionOfI = particles[i].interactions[f];
 					const interactionOfJ = particles[j].interactions[f];
+					let polarity = 0;
 					if ((distance < forces[f].range && distance > forces[f].minRange) && (count % forces[f].freq == 0))			
 						switch (forces[f].attractionType) {
 							case 0: //Universal attraction
@@ -390,19 +392,19 @@ function interact() {
 								fullInteraction = forces[f].mag * interactionOfI * interactionOfJ;
 								break;
 							case 5: //Attracted by positive, repelled by negative
-								const polarity = (interactionOfJ < 0) ? -1 : 1;
+								polarity = (interactionOfJ < 0) ? -1 : 1;
 								fullInteraction = polarity * forces[f].mag * interactionOfI * interactionOfJ;
 								break;
 							case 6: //Attracted by negative, repelled by positive
-								const polarity = (interactionOfJ < 0) ? 1 : -1;
+								polarity = (interactionOfJ < 0) ? 1 : -1;
 								fullInteraction = polarity * forces[f].mag * interactionOfI * interactionOfJ;
 								break;
 							case 7: //Stronger particle determines full interaction
-								const stronger = (interactionOfI >= interactionOfJ) ? interactionOfI : interactionOfJ;
+								let stronger = (interactionOfI >= interactionOfJ) ? interactionOfI : interactionOfJ;
 								fullInteraction = forces[f].mag * stronger * stronger;
 								break;
 							case 8: //Weaker particle determines full interaction
-								const weaker = (interactionOfI >= interactionOfJ) ? interactionOfI : interactionOfJ;
+								let weaker = (interactionOfI >= interactionOfJ) ? interactionOfI : interactionOfJ;
 								fullInteraction = forces[f].mag * weaker * weaker;
 								break;
 							case 9: //Distance scaling
