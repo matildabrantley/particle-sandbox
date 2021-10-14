@@ -2,7 +2,6 @@
   //const DIMS = 2; //2d
   const initialNumForces = 6;
   const forces = new Array(initialNumForces);
-  
   const ROW=20;
   const COL=12;
   const numParticles = ROW*COL;
@@ -116,17 +115,15 @@
 
   
 //add random particle to random location
-function addRandomParticle(){
-
-
+const addRandomParticle = () => {
+	
 }
   
-function removeRandomParticle(){
+const removeRandomParticle = () => {
+	
+}
 
-
-}  
-
-function addCustomForce(){
+const addCustomForce = () => {
 	const name = prompt("Name of force: ", "Force " + (forces.length + 1));
 	const mag = (name == null) ? 0 : prompt("New force's strength", "10.5");
 	const range = (mag == null) ? 0 : prompt("New force's range:", "75");
@@ -151,7 +148,7 @@ function addCustomForce(){
 	*/
 }
 
-function addCustomParticle(){
+const addCustomParticle = () => {
 	//const name = prompt("New particle's name:", "New Particle");
 	const quantity = prompt("How many:", "20");
 	const size = (quantity == null) ? 0 : prompt("New particle's size (1-5):", "2");
@@ -182,7 +179,7 @@ function addCustomParticle(){
 	}
 }
 
-function keyMoveAllParticles(event){
+const keyMoveAllParticles = (event) => {
 	const direction = [0,0];
     switch (event.keyCode) {
         case 37: direction[0] -= 2; //left key press
@@ -200,7 +197,7 @@ function keyMoveAllParticles(event){
 	}
 }
 
-function onMouseDown(event) {
+const onMouseDown = (event) => {
 
 	event.preventDefault();
 	canvas.addEventListener( 'mousemove', onMouseMove, false );
@@ -213,21 +210,21 @@ function onMouseDown(event) {
 	particles.push(new Particle(mouseDownX, mouseDownY, 20, "square", "black", forceInteractions)); 
 }
 
-function onMouseUp(event) {
+const onMouseUp = (event) => {
 	canvas.removeEventListener( 'mousemove', onMouseMove, false );
 	canvas.removeEventListener( 'mouseup', onMouseUp, false );
 	mouseDown = false;
 	particles.pop();
 }
 
-function onMouseMove(event) {
+const onMouseMove = (event) => {
 	if (mouseDown){
 		particles[particles.length-1].x = event.pageX - canvas.offsetLeft;
 		particles[particles.length-1].y = event.pageY - canvas.offsetTop;
 	}
 }
 
-function viewPaths(){
+const viewPaths = () => {
 	const checkBox = document.getElementById("trailCheckbox");
 	if (checkBox.checked == true)
 		trails = true;
@@ -235,7 +232,7 @@ function viewPaths(){
 		trails = false;
 }
 
-function edgeCollisionChange(){
+const edgeCollisionChange = () => {
 	const checkBox = document.getElementById("edgeCollisionCheckbox");
 	if (checkBox.checked == true)
 		edgeCollision = true;
@@ -243,7 +240,7 @@ function edgeCollisionChange(){
 		edgeCollision = false;
 }
 
-function randomAttractions(){
+const randomAttractions = () => {
 	const checkBox = document.getElementById("randomAttractionsCheckbox");
 	if (checkBox.checked == true)
 		randomAttraction = true;
@@ -251,11 +248,11 @@ function randomAttractions(){
 		randomAttraction = false;
 }
 
-function sliderMove(id, value){
+const sliderMove = (id, value) => {
 	forces[id].mag = value;
 }
 
-function setDownwardGravity(value){
+const setDownwardGravity = (value) => {
 	forces[0].special = parseInt(value);
 	//document.getElementById("output1").innerHTML = "Downward Gravity = " + forces[0].special;
 }
@@ -440,7 +437,7 @@ function interact() {
 	//repaint();
 }
 
-function repaint(){
+const repaint = () => {
 	//paint the new situation
 	for(let i=0; i<particles.length; i++){
 		if (particles[i].shape == "circle"){
