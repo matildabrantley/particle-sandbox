@@ -6,6 +6,8 @@
 Explore a world of emergent 2D particle interactions formed from simple rules of attraction and repulsion of various particle types. Originally created Jan 2018.
 ## Table of Contents:
 * [Features](#features)
+* [Video](#video)
+* [Screenshots](#screenshots)
 * [License](#license)
 * [Questions](#questions)
 
@@ -18,8 +20,19 @@ Three real world forces loosely simulated:
  
 Emergent interactions and atoms:
 * When a charged medium-range force and a short-range stronger force operate at the same time, along with particles corresponding to different charge and mass, the result is an orbital shell similar to atoms. Tweaking the range and strength of the forces can result in multiple shells. Extra forces allow the user to witness what would happen in a hypothetical world with different physics.
+
+Drag particles:
+* Users can pull particles around with the mouse acting as a super heavy particle.
+
+Trails: 
+* Users can select trails to view the entire path of particles.
+
+Add New Force or Particle:
+* Users can create a new force or particle with specific interactions for every existing force or particle.
+## Video
+![Video](particle-video.gif)
 ## Screenshots
-![Screenshot]()
+![Screenshot](ss1.png)
 ## License
 The project is licensed under the MIT License license.
 ## Questions
