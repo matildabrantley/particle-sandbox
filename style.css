@@ -1,7 +1,7 @@
 body {
 	background: url("background3.png") repeat 0 0;
 	background-size: cover;
-	font-family: "Times New Roman", Times, serif;
+	font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	color: white;
 }
 
@@ -10,7 +10,7 @@ canvas {
     background-color: #000000;
 	margin-left: 5%;
     width: clamp(50%, 1200px, 90%);
-    height: min(70%, 1000px);
+    height: min(70%, 1050px);
 }
 
 p {
@@ -22,12 +22,12 @@ p {
 
 a {
 	font-size: 22px;
-	color: black;
+	color: rgb(33, 29, 34);
 }
 
 h1 {
-	margin-left: 75px;
-	font-size: 48px;
+	margin-left: 5%;
+	font-size: 45px;
 	color: black;
 	font-family: Courier;
 }
